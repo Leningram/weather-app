@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roboto, sans-serif;
 }
 
 .app {
@@ -82,11 +83,4 @@ main {
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
   text-align: center;
   box-shadow: 3px 6px rbga(0, 0, 0, 0.2);
-}
-
-.weather-container .weather {
-  color: white;
-  font-size: 48px;
-  font-weight: 700;
-  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }

@@ -16,7 +16,6 @@ function App() {
                 .then((result) => {
                     setWeather(result);
                     setCity("");
-                    console.log(result);
                 });
         }
     };
@@ -69,7 +68,6 @@ function App() {
                         </div>
                         <div className="weather-container">
                             <div className="temperature">{Math.round(weather.main.temp)}°C</div>
-                            <div className="weather">Солнечно</div>
                         </div>
                     </div>
                 ) : (
