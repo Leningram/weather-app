@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+
+import enTranslations from "@shopify/polaris/locales/en.json";
+import { AppProvider } from "@shopify/polaris";
+
 import SearchWeather from "./components/search-weather/searchWeather";
 import ShowWeather from "./components/show-weather/show-weather";
 import FavList from "./components/fav-cities-list/fav-cities-list";
@@ -89,20 +93,22 @@ export default class App extends Component {
     render() {
         const { city, weather, country, favourites } = this.state;
         return (
-            <div className="app">
-                <main>
-                    <SearchWeather onSearch={this.search} />
+            <AppProvider i18n={enTranslations}>
+                <div className="app">
+                    <main>
+                        <SearchWeather onSearch={this.search} />
 
-                    <ShowWeather
-                        addFav={this.addFav}
-                        weather={weather}
-                        city={city}
-                        country={country}
-                        date={this.currentDate(new Date())}
-                    />
-                    <FavList favourites={favourites} removeFav={this.removeFav} />
-                </main>
-            </div>
+                        <ShowWeather
+                            addFav={this.addFav}
+                            weather={weather}
+                            city={city}
+                            country={country}
+                            date={this.currentDate(new Date())}
+                        />
+                        <FavList favourites={favourites} removeFav={this.removeFav} onSearch={this.search} />
+                    </main>
+                </div>
+            </AppProvider>
         );
     }
 }

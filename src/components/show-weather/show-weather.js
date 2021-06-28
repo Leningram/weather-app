@@ -1,6 +1,8 @@
 import React from "react";
 import { Component } from "react";
 
+import { Button } from "@shopify/polaris";
+
 export default class ShowWeather extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +18,9 @@ export default class ShowWeather extends Component {
                         {weather.name}, {weather.sys.country}
                     </div>
                     <div className="date">{date}</div>
-                    <button onClick={() => addFav(weather.name)}> Добавить в изранное </button>
+                    <Button size="large" onClick={() => addFav(weather.name)}>
+                        Добавить в изранное
+                    </Button>
                 </div>
                 <div className="weather-container">
                     <div className="temperature">{Math.round(weather.main.temp)}°C</div>
