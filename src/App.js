@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import SearchWeather from "./components/search-weather/searchWeather";
+import ShowWeather from "./components/show-weather/show-weather";
+import FavList from "./components/fav-cities-list/fav-cities-list";
 
 const api = {
-    key: "0750508cb95645cad3125fd092fb7871",
+    key: "a8c07f8a8d80fb52a4794b2fe34b7671",
     base: "https://api.openweathermap.org/data/2.5/"
 };
 
@@ -12,19 +14,37 @@ export default class App extends Component {
         this.state = {
             city: "",
             country: "",
-            weather: ""
+            weather: "",
+            favourites: []
         };
         this.search = this.search.bind(this);
+        this.addToFav = this.addToFav.bind(this);
+        this.currentDate = this.currentDate.bind(this);
     }
 
     search(city) {
-        console.log("it works!");
-        // fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
-        //     .then((res) => res.json())
-        //     .then((result) => {
-        //         this.setState({ weather: result });
-        //         this.setState({ city: "" });
-        //     });
+        fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState({ weather: result });
+                this.setState({ city: "" });
+            });
+    }
+
+    addToFav(city) {
+        if (localStorage.getItem("cities")) {
+            let cities = JSON.parse(localStorage.getItem("cities"));
+            // Проверяем, есть ли такой город в избранном
+            if (cities.indexOf(city) < 0) {
+                cities.push(city);
+                localStorage.setItem("cities", JSON.stringify(cities));
+                this.setState({ favourites: cities });
+            }
+        } else {
+            let cities = [city];
+            localStorage.setItem("cities", JSON.stringify(cities));
+            this.setState({ favourites: cities });
+        }
     }
 
     currentDate(data) {
@@ -53,35 +73,20 @@ export default class App extends Component {
     }
 
     render() {
-        const { city, weather, country } = this.state;
+        const { city, weather, country, favourites } = this.state;
         return (
             <div className="app">
                 <main>
-                    {/* <div className="search-container">
-                        <input
-                            type="text"
-                            className="search-field"
-                            placeholder="Поиск..."
-                            onChange={(e) => this.setState({ city: e.target.value })}
-                            value={city}
-                        />
-                    </div> */}
                     <SearchWeather onSearch={this.search} />
-                    {typeof weather.main != "undefined" ? (
-                        <div>
-                            <div className="location-container">
-                                <div className="location">
-                                    {weather.name}, {weather.sys.country}
-                                </div>
-                                <div className="date">{this.currentDate(new Date())}</div>
-                            </div>
-                            <div className="weather-container">
-                                <div className="temperature">{Math.round(weather.main.temp)}°C</div>
-                            </div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
+
+                    <ShowWeather
+                        addToFav={this.addToFav}
+                        weather={weather}
+                        city={city}
+                        country={country}
+                        date={this.currentDate(new Date())}
+                    />
+                    <FavList favourites={favourites} />
                 </main>
             </div>
         );
