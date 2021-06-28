@@ -15,11 +15,12 @@ export default class App extends Component {
             city: "",
             country: "",
             weather: "",
-            favourites: []
+            favourites: JSON.parse(localStorage.getItem("cities")) || []
         };
         this.search = this.search.bind(this);
-        this.addToFav = this.addToFav.bind(this);
+        this.addFav = this.addFav.bind(this);
         this.currentDate = this.currentDate.bind(this);
+        this.removeFav = this.removeFav.bind(this);
     }
 
     search(city) {
@@ -31,7 +32,7 @@ export default class App extends Component {
             });
     }
 
-    addToFav(city) {
+    addFav(city) {
         if (localStorage.getItem("cities")) {
             let cities = JSON.parse(localStorage.getItem("cities"));
             // Проверяем, есть ли такой город в избранном
@@ -45,6 +46,19 @@ export default class App extends Component {
             localStorage.setItem("cities", JSON.stringify(cities));
             this.setState({ favourites: cities });
         }
+    }
+
+    removeFav(index) {
+        this.setState(({ favourites }) => {
+            const before = favourites.slice(0, index);
+            const after = favourites.slice(index + 1);
+            const newArr = [...before, ...after];
+            localStorage.setItem("cities", JSON.stringify(newArr));
+
+            return {
+                favourites: newArr
+            };
+        });
     }
 
     currentDate(data) {
@@ -80,13 +94,13 @@ export default class App extends Component {
                     <SearchWeather onSearch={this.search} />
 
                     <ShowWeather
-                        addToFav={this.addToFav}
+                        addFav={this.addFav}
                         weather={weather}
                         city={city}
                         country={country}
                         date={this.currentDate(new Date())}
                     />
-                    <FavList favourites={favourites} />
+                    <FavList favourites={favourites} removeFav={this.removeFav} />
                 </main>
             </div>
         );

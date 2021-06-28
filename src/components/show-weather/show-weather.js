@@ -8,7 +8,7 @@ export default class ShowWeather extends Component {
     }
 
     render() {
-        const { weather, addToFav, date } = this.props;
+        const { weather, addFav, date } = this.props;
         return typeof weather.main != "undefined" ? (
             <div>
                 <div className="location-container">
@@ -16,7 +16,7 @@ export default class ShowWeather extends Component {
                         {weather.name}, {weather.sys.country}
                     </div>
                     <div className="date">{date}</div>
-                    <button onClick={() => addToFav(weather.name)}> Добавить в изранное </button>
+                    <button onClick={() => addFav(weather.name)}> Добавить в изранное </button>
                 </div>
                 <div className="weather-container">
                     <div className="temperature">{Math.round(weather.main.temp)}°C</div>
