@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Roboto, sans-serif;
+  font-family: 'Overpass', sans-serif;
 }
 
 .app {
@@ -12,7 +12,12 @@
 }
 
 main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .search-container {
@@ -76,9 +81,9 @@ main {
   height: 15rem;
   margin: 30px auto;
 
-  background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 15px 25px;
+  padding: 15px 25px; */
   color: white;
 
   font-size: 100px;
@@ -86,10 +91,40 @@ main {
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
   text-align: center;
   box-shadow: 3px 6px rbga(0, 0, 0, 0.2);
+  text-shadow: -1.39839px 2.09758px 0.699193px rgba(0, 0, 0, 0.1);
 }
 
 .favouriteCity {
   cursor: pointer;
   color: white;
   font-size: 32px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  width: 45rem;
+  height: auto;
+
+  padding: 40px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+  border-radius: 25px;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  overflow: hidden;
+}
+
+.result-container:before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  filter: blur(10px);
+  margin: -20px;
 }

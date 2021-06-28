@@ -1,8 +1,6 @@
 import React from "react";
 import { Component } from "react";
 
-import { Button } from "@shopify/polaris";
-
 export default class FavList extends Component {
     constructor(props) {
         super(props);
@@ -16,9 +14,9 @@ export default class FavList extends Component {
                     <span className="favouriteCity" onClick={() => this.props.onSearch(item)}>
                         {item}
                     </span>
-                    <Button size="large" onClick={() => this.props.removeFav(index)}>
+                    <button size="large" onClick={() => this.props.removeFav(index)}>
                         Удалить
-                    </Button>
+                    </button>
                 </li>
             );
         });
