@@ -7,11 +7,6 @@ import SearchWeather from "./components/search-weather/searchWeather";
 import ShowWeather from "./components/show-weather/show-weather";
 import FavList from "./components/fav-cities-list/fav-cities-list";
 
-const api = {
-    key: "a8c07f8a8d80fb52a4794b2fe34b7671",
-    base: "https://api.openweathermap.org/data/2.5/"
-};
-
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -19,15 +14,21 @@ export default class App extends Component {
             city: "",
             country: "",
             weather: "",
-            favourites: JSON.parse(localStorage.getItem("cities")) || []
+            favourites: JSON.parse(localStorage.getItem("cities")) || [] //получаем список избранных городов. Если его нет, присваиваем пустой массив
         };
         this.search = this.search.bind(this);
         this.addFav = this.addFav.bind(this);
         this.currentDate = this.currentDate.bind(this);
         this.removeFav = this.removeFav.bind(this);
+        this.setCurrentCity = this.removeFav.bind(this);
     }
 
     search(city) {
+        const api = {
+            key: "a8c07f8a8d80fb52a4794b2fe34b7671",
+            base: "https://api.openweathermap.org/data/2.5/"
+        };
+
         fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
             .then((res) => res.json())
             .then((result) => {
@@ -36,12 +37,23 @@ export default class App extends Component {
             });
     }
 
+    setCurrentCity() {}
+
+    componentDidMount() {
+        fetch("http://ip-api.com/json/")
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState({ city: result.city }); //Получаем текущий город по ip адрессу
+                this.search(result.city); //показываем погоду текущего города
+            });
+    }
+
     addFav(city) {
         if (localStorage.getItem("cities")) {
             let cities = JSON.parse(localStorage.getItem("cities"));
             // Проверяем, есть ли такой город в избранном
             if (cities.indexOf(city) < 0) {
-                cities.push(city);
+                cities.push(city); //если нет, добавляем
                 localStorage.setItem("cities", JSON.stringify(cities));
                 this.setState({ favourites: cities });
             }
@@ -54,10 +66,8 @@ export default class App extends Component {
 
     removeFav(index) {
         this.setState(({ favourites }) => {
-            const before = favourites.slice(0, index);
-            const after = favourites.slice(index + 1);
-            const newArr = [...before, ...after];
-            localStorage.setItem("cities", JSON.stringify(newArr));
+            const newArr = [...favourites.slice(0, index), ...favourites.slice(index + 1)]; //создаем новый массив без элемента с нужным индексом
+            localStorage.setItem("cities", JSON.stringify(newArr)); //перезаписываем новый массив в localStorage
 
             return {
                 favourites: newArr
@@ -65,6 +75,7 @@ export default class App extends Component {
         });
     }
 
+    //Конвертация текущей даты
     currentDate(data) {
         let months = [
             "Январь",

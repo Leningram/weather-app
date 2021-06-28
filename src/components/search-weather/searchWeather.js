@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { TextField, Button, Form, FormLayout } from "@shopify/polaris";
+
 export default class SearchWeather extends Component {
     constructor(props) {
         super(props);
@@ -8,11 +10,18 @@ export default class SearchWeather extends Component {
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
     }
 
     onValueChange(e) {
         this.setState({
-            text: e.target.value
+            text: e
+        });
+    }
+
+    handleClearButtonClick() {
+        this.setState({
+            text: ""
         });
     }
 
@@ -26,11 +35,21 @@ export default class SearchWeather extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <input type="text" onChange={this.onValueChange} value={this.state.text} />
+            <Form onSubmit={this.onSubmit}>
+                <FormLayout>
+                    <TextField
+                        label="Store name"
+                        clearButton
+                        onClearButtonClick={this.handleClearButtonClick}
+                        onChange={this.onValueChange}
+                        value={this.state.text}
+                    />
 
-                <button>Показать</button>
-            </form>
+                    <Button size="large" onClick={this.onSubmit}>
+                        Показать
+                    </Button>
+                </FormLayout>
+            </Form>
         );
     }
 }
