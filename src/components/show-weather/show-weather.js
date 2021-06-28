@@ -11,7 +11,7 @@ export default class ShowWeather extends Component {
 
     render() {
         const { weather, addFav, date } = this.props;
-        return typeof weather.main != "undefined" ? (
+        return weather.main ? (
             <div>
                 <div className="location-container">
                     <div className="location">

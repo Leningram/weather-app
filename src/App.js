@@ -77,7 +77,7 @@ export default class App extends Component {
 
     //Конвертация текущей даты
     currentDate(data) {
-        let months = [
+        const months = [
             "Январь",
             "Февраль",
             "Март",
@@ -91,12 +91,12 @@ export default class App extends Component {
             "Ноябрь",
             "Декабрь"
         ];
-        let days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+        const days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
 
-        let day = days[data.getDay()];
-        let date = data.getDate();
-        let month = months[data.getMonth()];
-        let year = data.getFullYear();
+        const day = days[data.getDay()];
+        const date = data.getDate();
+        const month = months[data.getMonth()];
+        const year = data.getFullYear();
 
         return `${day} ${date} ${month} ${year}`;
     }
