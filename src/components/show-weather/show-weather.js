@@ -1,7 +1,5 @@
 import React from "react";
 import { Component } from "react";
-import Button from "@material-ui/core/Button";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 
 export default class ShowWeather extends Component {
     constructor(props) {
@@ -18,10 +16,9 @@ export default class ShowWeather extends Component {
                         {weather.name}, {weather.sys.country}
                     </div>
                     <div className="date">{date}</div>
-                    <Button variant="outlined" color="primary" size="large" onClick={() => addFav(weather.name)}>
-                        <BookmarkIcon fontSize="large" />
+                    <button size="large" onClick={() => addFav(weather.name)}>
                         Добавить в изранное
-                    </Button>
+                    </button>
                 </div>
                 <div className="weather-container">
                     <div className="temperature">{Math.round(weather.main.temp)}°C</div>

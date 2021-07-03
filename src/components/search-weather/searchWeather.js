@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 
 export default class SearchWeather extends Component {
     constructor(props) {
@@ -28,17 +26,9 @@ export default class SearchWeather extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <TextField
-                    onChange={this.onValueChange}
-                    value={this.state.text}
-                    id="standard-basic"
-                    color="primary"
-                    label="Введите город"
-                />
-                <Button size="large" variant="contained" color="primary" onClick={this.onSubmit}>
-                    Показать
-                </Button>
+            <form>
+                <input onChange={this.onValueChange} value={this.state.text} />
+                <button onClick={this.onSubmit}>Показать</button>
             </form>
         );
     }

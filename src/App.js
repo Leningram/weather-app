@@ -21,20 +21,20 @@ export default class App extends Component {
     }
 
     search(city) {
-        if (city) {
-            const api = {
-                key: "a8c07f8a8d80fb52a4794b2fe34b7671",
-                base: "https://api.openweathermap.org/data/2.5/"
-            };
+        const api = {
+            key: "a8c07f8a8d80fb52a4794b2fe34b7671",
+            base: "https://api.openweathermap.org/data/2.5/"
+        };
 
-            fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
-                .then((res) => res.json())
-                .then((result) => {
-                    this.setState({ weather: result });
-                    this.setState({ city: "" });
-                });
-        }
+        fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState({ weather: result });
+                this.setState({ city: "" });
+            });
     }
+
+    setCurrentCity() {}
 
     componentDidMount() {
         fetch("http://ip-api.com/json/")
