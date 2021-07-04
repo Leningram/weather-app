@@ -5,6 +5,47 @@
   font-family: 'Overpass', sans-serif;
 }
 
+button {
+  margin-top: 10px;
+
+  position: relative;
+  width: 200px;
+  height: 50px;
+
+  font-size: 18px;
+
+  color: white;
+  background: #0b67bd;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: rgb(9, 74, 160);
+}
+
+input.text {
+  width: 100%;
+  height: 100px;
+  padding: 0 12px;
+  font-size: 18px;
+  background-color: bisque;
+  border: 0;
+
+  background: #fff;
+
+  border: 1px solid #a8a8a8;
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline: none;
+}
+
+input:focus {
+  border: solid 2px #BD3E0B;
+}
+
 .app {
   background-image: url('./assets/10107.jpg');
   background-size: cover;

@@ -27,7 +27,7 @@ export default class SearchWeather extends Component {
     render() {
         return (
             <form>
-                <input onChange={this.onValueChange} value={this.state.text} />
+                <input type="text" onChange={this.onValueChange} value={this.state.text} />
                 <button onClick={this.onSubmit}>Показать</button>
             </form>
         );
