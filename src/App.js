@@ -37,12 +37,7 @@ export default class App extends Component {
     setCurrentCity() {}
 
     componentDidMount() {
-        fetch("http://ip-api.com/json/")
-            .then((res) => res.json())
-            .then((result) => {
-                this.setState({ city: result.city }); //Получаем текущий город по ip адрессу
-                this.search(result.city); //показываем погоду текущего города
-            });
+        this.search("Saint Petersburg");
     }
 
     addFav(city) {
