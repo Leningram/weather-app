@@ -26,9 +26,11 @@ export default class SearchWeather extends Component {
 
     render() {
         return (
-            <form>
+            <form className="weather--form">
                 <input type="text" onChange={this.onValueChange} value={this.state.text} />
-                <button onClick={this.onSubmit}>Показать</button>
+                <button className="show--result__btn" onClick={this.onSubmit}>
+                    Показать
+                </button>
             </form>
         );
     }

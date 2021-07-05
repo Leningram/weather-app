@@ -11,9 +11,7 @@ export default class FavList extends Component {
         const favourites = this.props.favourites.map((item, index) => {
             return (
                 <li key={index}>
-                    <span className="favouriteCity" onClick={() => this.props.onSearch(item)}>
-                        {item}
-                    </span>
+                    <span onClick={() => this.props.onSearch(item)}>{item}</span>
                     <button size="large" onClick={() => this.props.removeFav(index)}>
                         Удалить
                     </button>
@@ -21,6 +19,10 @@ export default class FavList extends Component {
             );
         });
 
-        return <div className="favourites">{favourites}</div>;
+        return (
+            <div className="weather--favourites">
+                <ul>{favourites}</ul>
+            </div>
+        );
     }
 }

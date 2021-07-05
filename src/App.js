@@ -97,9 +97,8 @@ export default class App extends Component {
         const { city, weather, country, favourites } = this.state;
         return (
             <div className="app">
-                <main>
+                <main className="weather--container">
                     <SearchWeather onSearch={this.search} />
-
                     <ShowWeather
                         addFav={this.addFav}
                         weather={weather}
