@@ -37,7 +37,12 @@ export default class App extends Component {
     setCurrentCity() {}
 
     componentDidMount() {
-        this.search("Saint Petersburg");
+        fetch("https://www.travelpayouts.com/whereami?locale=ru")
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState({ city: result.name });
+                this.search(this.state.city);
+            });
     }
 
     addFav(city) {
