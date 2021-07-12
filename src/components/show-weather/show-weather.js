@@ -15,7 +15,9 @@ export default class ShowWeather extends Component {
                     {weather.name}, {weather.sys.country}
                 </div>
                 <div className="weather--result__data">{date}</div>
-                <button onClick={() => addFav(weather.name)}>Добавить в изранное</button>
+                <button className="secondary-btn" onClick={() => addFav(weather.name)}>
+                    Добавить в изранное
+                </button>
                 <div className="weather--result__temperature">{Math.round(weather.main.temp)}°C</div>
             </div>
         ) : (

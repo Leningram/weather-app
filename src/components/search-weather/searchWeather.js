@@ -4,7 +4,8 @@ export default class SearchWeather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ""
+            text: "",
+            autocomplete: []
         };
         this.onValueChange = this.onValueChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -27,12 +28,16 @@ export default class SearchWeather extends Component {
     render() {
         return (
             <form className="weather--form">
-                <input
-                    placeholder="Введите город... "
-                    type="text"
-                    onChange={this.onValueChange}
-                    value={this.state.text}
-                />
+                <div class="input-wrapper">
+                    <input
+                        id="search-weather"
+                        placeholder="Введите город... "
+                        type="text"
+                        onChange={this.onValueChange}
+                        value={this.state.text}
+                    />
+                    <label for="search-weather" class="fa fa-search input-icon"></label>
+                </div>
                 <button className="show--result__btn" onClick={this.onSubmit}>
                     Показать
                 </button>

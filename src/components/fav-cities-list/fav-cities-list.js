@@ -10,9 +10,13 @@ export default class FavList extends Component {
     render() {
         const favourites = this.props.favourites.map((item, index) => {
             return (
-                <li key={index}>
+                <li key={index} className="fav-item">
                     <span onClick={() => this.props.onSearch(item)}>{item}</span>
-                    <button size="large" onClick={() => this.props.removeFav(index)}>
+                    <button
+                        className="secondary-btn delete-btn"
+                        size="large"
+                        onClick={() => this.props.removeFav(index)}
+                    >
                         Удалить
                     </button>
                 </li>
